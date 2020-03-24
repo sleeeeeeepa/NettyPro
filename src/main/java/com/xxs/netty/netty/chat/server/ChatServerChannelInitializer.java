@@ -10,10 +10,10 @@ public class ChatServerChannelInitializer extends ChannelInitializer<SocketChann
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ch.pipeline()
-//                .addLast(new RegisterHandler())
-                .addLast(new StringDecoder())
-                .addLast(new StringEncoder())
-//                .addLast(new ChatMsgCoder())
+                .addLast(new RegisterHandler())
+//                .addLast(new StringDecoder())
+//                .addLast(new StringEncoder())
+                .addLast(new ChatMsgCoder())
                 .addLast(new ChatDistribute());
     }
 }

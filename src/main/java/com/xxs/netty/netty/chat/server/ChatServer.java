@@ -2,12 +2,9 @@ package com.xxs.netty.netty.chat.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelOption;
-import io.netty.channel.group.ChannelGroup;
-import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.util.concurrent.GlobalEventExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +22,8 @@ public class ChatServer {
         serverBootstrap = new ServerBootstrap();
         serverBootstrap.group(boss, worker)
                 .channel(NioServerSocketChannel.class)
-                .childOption(ChannelOption.SO_BACKLOG, 128)
+                .option(ChannelOption.SO_BACKLOG, 128)
+                .childOption(ChannelOption.SO_KEEPALIVE, true)
                 .childHandler(new ChatServerChannelInitializer());
     }
     public void run () {

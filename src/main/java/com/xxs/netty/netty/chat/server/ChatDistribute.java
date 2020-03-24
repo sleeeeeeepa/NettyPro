@@ -18,10 +18,14 @@ public class ChatDistribute extends SimpleChannelInboundHandler<String> {
     public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         String msg1 = (String) msg;
         System.out.println("准备分发消息" + msg1);
+//        ctx.channel().writeAndFlush("123");
+
         //准备分发信息
         for (Channel socketChannel : ChatServer.socketChannelList) {
-            if(socketChannel != ctx.channel()){
-                socketChannel.writeAndFlush(socketChannel.remoteAddress()+":"+msg1);
+            if (socketChannel != ctx.channel()) {
+                socketChannel.writeAndFlush(socketChannel.remoteAddress() + "[客户]:" + msg1);
+            } else {
+                socketChannel.writeAndFlush(socketChannel.remoteAddress() + "[自己]:" + msg1);
             }
         }
     }

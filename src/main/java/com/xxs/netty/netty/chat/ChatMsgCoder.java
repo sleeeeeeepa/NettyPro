@@ -11,7 +11,8 @@ public class ChatMsgCoder extends MessageToMessageCodec {
         try {
             String e = String.valueOf(msg);
             System.out.println("encode"+e);
-            out.add(e);
+            ctx.writeAndFlush(e);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -21,6 +22,6 @@ public class ChatMsgCoder extends MessageToMessageCodec {
     protected void decode(ChannelHandlerContext ctx, Object msg, List out) throws Exception {
         String e = String.valueOf(msg);
         System.out.println("decode"+e);
-        out.add(e);
+        ctx.writeAndFlush(e);
     }
 }
