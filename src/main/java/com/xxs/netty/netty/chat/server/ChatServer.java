@@ -1,17 +1,22 @@
-package com.xxs.netty.netty.chat;
+package com.xxs.netty.netty.chat.server;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.concurrent.GlobalEventExecutor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatServer {
     private ServerBootstrap serverBootstrap;
-    public static List<SocketChannel> socketChannelList;
+    public static List<SocketChannel> socketChannelList = new ArrayList<>();
+//    public static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+
 
     public ChatServer() {
         NioEventLoopGroup boss = new NioEventLoopGroup();
